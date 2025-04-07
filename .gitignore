@@ -1,0 +1,9 @@
+# Ignore files within directories
+.vscode
+build/**
+!build/.gitkeep
+tests/output/**
+!tests/output/.gitkeep
+
+# Ignore executable files
+parser
