@@ -33,7 +33,7 @@ Token Lexer::nextToken()
         return Token(TokenType::NUMBER, number);
     }
 
-    pos++; // move past the current character
+    pos++;
     switch (current)
     {
     case '=':
@@ -45,7 +45,7 @@ Token Lexer::nextToken()
     case ';':
         return Token(TokenType::SEMICOLON, ";");
     default:
-        return Token(TokenType::END, ""); // basic error handling
+        return Token(TokenType::END, "");
     }
 }
 

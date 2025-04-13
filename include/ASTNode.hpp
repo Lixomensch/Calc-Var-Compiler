@@ -38,10 +38,17 @@ struct Statement : ASTNode
 {
 };
 
-struct VarDeclaration : Statement
+class VarDeclaration : public Statement
 {
+public:
     std::string name;
-    VarDeclaration(const std::string &name) : name(name) {}
+    std::unique_ptr<Expression> initExpr;
+
+    VarDeclaration(std::string name)
+        : name(std::move(name)), initExpr(nullptr) {}
+
+    VarDeclaration(std::string name, std::unique_ptr<Expression> initExpr)
+        : name(std::move(name)), initExpr(std::move(initExpr)) {}
 };
 
 struct Assignment : Statement

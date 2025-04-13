@@ -55,9 +55,25 @@ std::unique_ptr<Statement> Parser::parseVarDeclaration()
     if (!check(TokenType::IDENTIFIER))
         throw std::runtime_error("Expected variable name");
     std::string name = advance().value;
+
+    std::unique_ptr<Expression> initExpr = nullptr;
+
+    if (match(TokenType::ASSIGN))
+    {
+        initExpr = parseExpression();
+    }
+
     if (!match(TokenType::SEMICOLON))
         throw std::runtime_error("Expected ';'");
-    return std::make_unique<VarDeclaration>(name);
+
+    if (initExpr)
+    {
+        return std::make_unique<VarDeclaration>(name, std::move(initExpr));
+    }
+    else
+    {
+        return std::make_unique<VarDeclaration>(name);
+    }
 }
 
 std::unique_ptr<Statement> Parser::parseAssignment()

@@ -21,6 +21,11 @@ void SemanticAnalyzer::analyzeStatement(const std::unique_ptr<Statement> &stmt)
             throw std::runtime_error("Variable '" + varDecl->name + "' redeclared.");
         }
         symbolTable.insert(varDecl->name);
+
+        if (varDecl->initExpr)
+        {
+            analyzeExpression(varDecl->initExpr);
+        }
     }
     else if (auto assign = dynamic_cast<Assignment *>(stmt.get()))
     {
