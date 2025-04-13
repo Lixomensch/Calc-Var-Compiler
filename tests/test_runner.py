@@ -8,7 +8,7 @@ EXECUTABLE = "./calcvar.exe" if os.name == "nt" else "./calcvar"
 def run_test_and_generate_output(test_file):
     base_name = os.path.splitext(test_file)[0]
     source_path = os.path.join(TESTS_DIR, test_file)
-    output_path = os.path.join(OUTPUT_DIR, base_name + ".out")
+    output_path = os.path.join(OUTPUT_DIR, base_name + ".calc.out")
 
     try:
         result = subprocess.run(
